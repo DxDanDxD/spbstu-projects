@@ -1,4 +1,4 @@
-''' dz nomer
+''' dz nomer 1
 
 s = input(str())
 c,m=0,0

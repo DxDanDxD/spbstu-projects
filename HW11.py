@@ -9,10 +9,10 @@ def proportion_of_education(dataframe):
     e12 = round(float(f['EDUC1'].where(f['EDUC1'] == 2).count() / flen), 2)
     mt12 = round(float(f['EDUC1'].where(f['EDUC1'] == 3).count() / flen), 2)
     c = round(float(f['EDUC1'].where(f['EDUC1'] == 4).count() / flen), 2)
-    a = {"less than high school": lt12,
-            "high school": e12,
-            "more than high school but not college": mt12,
-            "college": c}
+    a = {"Lesser than high school:": lt12,
+            "Exactly in the high school:": e12,
+            "Higher than the high school:": mt12,
+            "In the college:": c}
     print(a)
 proportion_of_education(f)
 

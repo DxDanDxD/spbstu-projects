@@ -1,115 +1,37 @@
-from random import randint
+import numpy as np
+import matplotlib.pyplot as plt
 
-'''dz nomer 1
+class Derivative:
+    def __init__(self, func):
+        self.func = func
+        self.h = 1e-5
 
-a=list()
-for i in range(3):
-  a.append([randint(0, 9) for x in range(3)])
-for i in range(3):
-  for j in range(3):
-    print(a[i][j], end = ' ')
-  print()
-print('Max of column n.3: ', max([a[i][2] for i in range(3)]))
-print('Max of column n.3', max(a[1]))'''
+    def __call__(self, x):
+        return (self.func(x + self.h) - self.func(x - self.h)) / (2 * self.h)
 
-'''dz nomer 2
+    def __get__(self, instance, owner):
+        return self
 
-a=list()
-n,m=3,3
-for i in range(n):
-  a.append([randint(-9, 9) for x in range(m)])
-for i in range(n):
-  for j in range(m):
-    print(a[i][j], end = ' ')
-  print()
-for i in range(n):
-  for j in range(m):
-    if a[i][j]<0:
-      a[i][j]=0
-    else:
-      a[i][j]=1
-for i in range(n):
-  for j in range(m):
-    print(a[i][j], end = ' ')
-  print()'''
+class ExponentialFunction:
+    def __init__(self, a):
+        self.a = a
+        self.derivative = Derivative(self)
 
-'''dz nomer 3
+    def __call__(self, x):
+        return self.a * np.exp(x)
 
-a=list()
-n=3
-for i in range(n):
-  a.append([randint(0, 9) for x in range(n)])
-a=[[2,7,6],[9,5,1],[4,3,8]]
-for i in range(n):
-  for j in range(n):
-    print(a[i][j], end = ' ')
-  print()
-s=sum(a[i])
-status=True
-for i in range(n-1):
-  if sum(a[i])!=s:
-    status=False
-for i in range(n-1):
-  if sum([a[j][i] for i in range(n)])!=s:
-    status=False
-if sum([a[i][i] for i in range(n)])!=s:
-  status=False
-if sum([a[i][n-i-1] for i in range(n)])!=s:
-  status=False
-print(status)'''
+exp_func = ExponentialFunction(a=1)
 
-'''dz nomer 4
+x_values = np.linspace(-2, 2, 400)
+f_values = exp_func(x_values)
+f_prime_values = exp_func.derivative(x_values)
 
-a=list()
-n=3
-for i in range(n):
-  a.append([randint(0, 9) for x in range(n)])
-a=[[1,2,3],[2,1,4],[3,4,1]]
-for i in range(n):
-  for j in range(n):
-    print(a[i][j], end = ' ')
-  print()
-status=True
-for i in range(n):
-  for j in range(n):
-    if a[n-j-1][i]!=a[i][n-j-1]:
-      status=False
-print(status)'''
-
-'''dz nomer 5
-
-a=list()
-n,m=3,4
-for i in range(n):
-  a.append([randint(0, 9) for x in range(m)])
-for i in range(n):
-  for j in range(m):
-    print(a[i][j], end = ' ')
-  print()
-summa=0
-for i in range(n):
-  if sum([a[i][j] for j in range(m)])>=summa:
-    summa=sum([a[i][j] for j in range(m)])
-    c=a[i]
-print(c,summa)'''
-
-'''dz nomer 6'''
-
-a = list()
-n, m = 3, 4
-for i in range(n):
-    a.append([randint(10, 99) for x in range(m)])
-for i in range(n):
-    for j in range(m):
-        print(a[i][j], end=' ')
-    print()
-for i in range(n):
-    if min(a[i]) % 2 == 0:
-        a[i][a[i].index(min(a[i]))] = 0
-    else:
-        a[i][a[i].index(min(a[i]))] = 1
-print()
-for i in range(n):
-    for j in range(m):
-        print(a[i][j], end=' ')
-    print()
+plt.figure(figsize=(10, 6))
+plt.plot(x_values, f_values, label='f(x) = e^x')
+plt.plot(x_values, f_prime_values, label="f'(x)")
+plt.title('Графики функции и её производной')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.grid(True)
+plt.show()

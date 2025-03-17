@@ -1,30 +1,51 @@
-'''dz nomer 1
+class Sauce:
+    def __init__(self, flavor, additive=None):
+        self.flavor = flavor
+        self.additive = additive
 
-x,y = int(input()), int(input())
-if y!=0:
-    print(x/y)
-else:
-    print('delenie na nol')'''
+    def show_my_sauce(self):
+        if self.additive:
+            print(f"Соус {self.flavor} с {self.additive}")
+        else:
+            print("Майонез")
 
-'''dz nomer 2
 
-x=int(input())
-if x>20:
-    print(round(x*0.65 , 2), ' 35%')'''
+class Employee:
+    def __init__(self, name, age, salary):
+        self.__name = name
+        self.__age = age
+        self.__salary = salary
+        self.__bonus = 0
 
-'''dz nomer 3'''
+    def get_name(self):
+        return self.__name
 
-m=int(input())
-month=['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
-if 1<=m<=12:
-    print('Месяц -',month[m-1],'Время года - ', end='')
-    if m==12 or 1<=m<=2:
-        print('Зима')
-    elif 3<=m<=5:
-        print('Весна')
-    elif 3<=m<=5:
-        print('Лето')
-    else:
-        print('Осень')
-else:
-    print('Normalniye chisla vvodi!')
+    def get_age(self):
+        return self.__age
+
+    def get_salary(self):
+        return self.__salary
+
+    def set_bonus(self, bonus):
+        self.__bonus = bonus
+
+    def get_bonus(self):
+        return self.__bonus
+
+    def get_total_salary(self):
+        return self.__salary + self.__bonus
+
+
+class Recipe:
+    def __init__(self, name, ingredients):
+        self.name = name
+        self.ingredients = ingredients
+
+    def print_ingredients(self):
+        print("Ингредиенты для приготовления блюда:")
+        for ingredient in self.ingredients:
+            print(f"- {ingredient}")
+
+    def cook(self):
+        print(f"Рецепт: {self.name}")
+        print("Блюдо готово!")
